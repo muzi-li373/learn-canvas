@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>滑动拼图验证码</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <input value="admin" readonly />
+      <input type="password" value="1234567890" readonly />
+      <div id="captcha"></div>
+      <div id="msg"></div>
+    </div>
+    <script src="./index.js"></script>
+    <script>
+      window.jigsaw.init({
+        el: document.getElementById("captcha"),
+        onSuccess: function () {
+          document.getElementById("msg").innerHTML = "登录成功！";
+          var _this = this;
+          setTimeout(() => {
+            _this.reset();
+            cleanMsg();
+          }, 300);
+        },
+        onFail: cleanMsg,
+        onRefresh: cleanMsg,
+      });
+      function cleanMsg() {
+        document.getElementById("msg").innerHTML = "";
+      }
+    </script>
+  </body>
+</html>
